@@ -36,5 +36,145 @@
         accessible platform like GitHub;</li>
     <li> The API must be deployed to Heroku.</li>
 </ul>
+
+<h2>Essential Features</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Request</th>
+        <th>URL</th>
+        <th>HTTP Method</th>
+        <th>Response</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Home page of myFlix App</td>
+        <td>/</td>
+        <td>GET</td>
+        <td>Message: "Welcome to myFlix App!"</td>
+    </tr>
+    <tr>
+        <td>Return a list of ALL movies to the user</td>
+        <td>GET</td>
+        <td>/movies</td>
+        <td>Return array of all JSON objects in the database</td>
+    </tr>
+    <tr>
+        <td>Return data about one movie by title</td>
+        <td>GET</td>
+        <td>/movies/:title</td>
+        <td>Return JSON object with data
+            (description, genre, director, image URL, whether it’s featured or not)
+            about a single movie by title
+            <br>
+            Example response
+            <br><code>
+                {
+                title: "...",
+                year: "...",
+                genre: "...",
+                director: "...",
+                description: "..."
+                }
+            </code>
+            <br></td>
+    </tr>
+    <tr>
+        <td>Return data about genre</td>
+        <td>GET</td>
+        <td>/genres/:title</td>
+        <td>Return JSON object with data about genre (description)
+            by name/title (e.g., “Thriller”)
+            <br>
+            Example response
+            <br><code>
+                {
+                title: "...",
+                genre: "...",
+                }
+            </code>
+            <br></td>
+    </tr>
+    <tr>
+        <td>Return data about a director</td>
+        <td>GET</td>
+        <td>/directors/:name</td>
+        <td>Return JSON object with data about director
+            (bio, birth year, death year) by name
+            <br>
+            Example response
+            <br><code>
+                {
+                director: "...",
+                years of life: "...",
+                bio: "..."
+                }
+            </code>
+            <br></td>
+    </tr>
+    <tr>
+        <td>Allow new users to register
+        </td>
+        <td>POST</td>
+        <td>/users</td>
+        <td>Create JSON object with data about a new user.
+            <br>
+            Example response
+            <br><code>
+                {
+                name: "Name Surname",
+                username:"name123",
+                email: "email@gmail.com",
+                password: "123456"
+                }
+            </code>
+            <br>
+            Message: "Registration completed"</td>
+    </tr>
+    <tr>
+        <td>Allow users to update their user info
+        </td>
+        <td>PUT</td>
+        <td>/users/:username</td>
+        <td>Update JSON object with user data.
+            <br>
+            Example
+            <br><code>
+                {
+                name: "Name Surname",
+                age: "21",
+                username:"name123",
+                email: "email@gmail.com",
+                password: "123456"
+                }
+            </code></td>
+            <br>
+            Message: "Information updated"</td>
+    </tr>
+    <tr>
+        <td>Allow users to add a movie to their list of favorites</td>
+        <td>POST</td>
+        <td>/users/:username/movies/:movieID</td>
+        <td>Create JSON object with data about a user's list of favorite movies.
+            Message: "Movie was added to favorites"</td>
+    </tr>
+    <tr>
+        <td>Allow users to remove a movie to their list of favorites.</td>
+        <td>DELETE</td>
+        <td>/users/:username/movies/:movieID</td>
+        <td>JSON object with data about a user's list of favorite movies.
+            Message: "Movie was deleted"</td>
+    </tr>
+    <tr>
+        <td>Allow existing users to deregister</td>
+        <td>DELETE</td>
+        <td>/users/:username</td>
+        <td>Delete user's account.
+            Message: "Your account was successfully deleted"</td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>

@@ -5,7 +5,7 @@ const app = express(); //instantiate app
 
 app.use(morgan('common')); //invoke logger
 
-let topMovies = [
+let movies = [
     {
         title: 'Shrek',
         year: '2001'
@@ -66,14 +66,48 @@ let topMovies = [
 
 // GET requests
 app.get('/', (req, res) => {
-    res.send('Welcome to my Shrek Movies Club!');
+    res.send('Welcome to my myFlix App!');
 });
 
 app.get('/movies', (req, res) => {
-    res.json(topMovies);
+    res.json(movies);
 });
 
-app.use(express.static('public'));
+app.get('/movies/:title', (req, res) => {
+    res.send('Movie by title');
+});
+
+app.get('/genres/:title', (req, res) => {
+    res.send('Genre by name/title');
+});
+
+app.get('/directors/:name', (req, res) => {
+    res.send('Data about director by name');
+});
+
+app.post('/users', (req, res) => {
+    res.send('Registration completed');
+});
+
+app.put('/users/:username', (req, res) => {
+    res.send('Information updated');
+});
+
+app.post('/users/:username/movies/:movieID', (req, res) => {
+    res.send('Movie was added to favorites');
+});
+
+app.delete('/users/:username/movies/:movieID', (req, res) => {
+    res.send('Movie was deleted');
+});
+
+app.delete('/users/:username', (req, res) => {
+    res.send('Your account was successfully deleted');
+});
+
+app.use(express.static('public', {
+    extensions: ['html'],
+}));
 
 app.use((err, req, res, next) => { //error handling
     console.error(err.stack);
