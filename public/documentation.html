@@ -71,11 +71,13 @@
             Example response
             <br><code>
                 {
+                id: "...",
                 title: "...",
-                year: "...",
+                description: "...",
                 genre: "...",
                 director: "...",
-                description: "..."
+                imagePath: "...",
+                featured: "..."
                 }
             </code>
             <br></td>
@@ -83,7 +85,7 @@
     <tr>
         <td>Return data about genre</td>
         <td>GET</td>
-        <td>/genres/:title</td>
+        <td>/genres/:name</td>
         <td>Return JSON object with data about genre (description)
             by name/title (e.g., “Thriller”)
             <br>
@@ -107,11 +109,26 @@
             <br><code>
                 {
                 director: "...",
-                years of life: "...",
-                bio: "..."
+                name: "...",
+                bio: "...",
+                birth: "...",
+                death: "..."
                 }
             </code>
             <br></td>
+    </tr>
+    <tr>
+        <td>Return a list of ALL users</td>
+        <td>GET</td>
+        <td>/users</td>
+        <td>Return array of all JSON objects in the database</td>
+    </tr>
+    <tr>
+        <td>Return data about a user by username</td>
+        <td>GET</td>
+        <td>/users/:username</td>
+        <td>Return JSON object with data about a user by name
+        </td>
     </tr>
     <tr>
         <td>Allow new users to register
@@ -123,14 +140,15 @@
             Example response
             <br><code>
                 {
-                name: "Name Surname",
-                username:"name123",
-                email: "email@gmail.com",
-                password: "123456"
+                id: "...",
+                username: "...",
+                password: "...",
+                email: "...",
+                birthday: "...",
+                favoriteMovies: "..."
                 }
             </code>
-            <br>
-            Message: "Registration completed"</td>
+            </td>
     </tr>
     <tr>
         <td>Allow users to update their user info
@@ -142,15 +160,15 @@
             Example
             <br><code>
                 {
-                name: "Name Surname",
-                age: "21",
-                username:"name123",
-                email: "email@gmail.com",
-                password: "123456"
+                id: "...",
+                username: "...",
+                password: "...",
+                email: "...",
+                birthday: "...",
+                favoriteMovies: "..."
                 }
             </code></td>
-            <br>
-            Message: "Information updated"</td>
+            </td>
     </tr>
     <tr>
         <td>Allow users to add a movie to their list of favorites</td>
