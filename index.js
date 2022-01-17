@@ -63,7 +63,7 @@ app.get('/', passport.authenticate('jwt', { session: false }),
 app.get('/movies', function (req, res) {
     Movies.find()
         .then(function (movies) {
-            res.status(201).json(movies);
+            res.json(movies);
         })
         .catch(function (error) {
             console.error(error);
