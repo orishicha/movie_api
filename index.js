@@ -48,28 +48,27 @@ app.get('/', passport.authenticate('jwt', { session: false }),
 });
 
 // Get all movies
-//temporarily remove the authentication middleware
-// app.get('/movies', passport.authenticate('jwt', { session: false }),
-//     (req, res) => {
-//     Movies.find()
-//         .then((movie) => {
-//             res.json(movie);
-//         })
-//         .catch((err) => {
-//             console.error(err);
-//             res.status(500).send('Error: ' + err);
-//         });
-// });
-app.get('/movies', function (req, res) {
+app.get('/movies', passport.authenticate('jwt', { session: false }),
+    (req, res) => {
     Movies.find()
-        .then(function (movies) {
-            res.json(movies);
+        .then((movie) => {
+            res.json(movie);
         })
-        .catch(function (error) {
-            console.error(error);
-            res.status(500).send('Error: ' + error);
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
         });
 });
+// app.get('/movies', function (req, res) {
+//     Movies.find()
+//         .then(function (movies) {
+//             res.json(movies);
+//         })
+//         .catch(function (error) {
+//             console.error(error);
+//             res.status(500).send('Error: ' + error);
+//         });
+// });
 
 // Get a movie by title
 app.get('/movies/:Title', passport.authenticate('jwt', { session: false }),
