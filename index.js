@@ -12,7 +12,8 @@ const { check, validationResult } = require('express-validator');
 
 const Movies = Models.Movie;
 const Users = Models.User;
-
+const Genres = Models.Genre;
+const Directors = Models.Director
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/myFlixDB',
     { useNewUrlParser: true, useUnifiedTopology: true });
@@ -87,16 +88,35 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }),
         });
 });
 
+// Get all genres
+app.get('/genres', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Genres.find()
+        .then((directors) => {
+            res.status(201).json(directors);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        });
+});
+
 // Get a genre by name
-app.get('/genres/:Name', passport.authenticate('jwt', { session: false }),
-    (req, res) => {
-    Movies.findOne({ "Genre.Name": req.params.Name })
-        .then((movie) => {
-            if (movie === null){
-                res.status(404).send("No genre found")
-            } else {
-                res.json(movie.Genre);
-            }
+app.get('/genres/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Genres.findOne({ Name: req.params.Name })
+        .then((genres) => {
+            res.status(201).json(genres);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        });
+});
+
+// Get all directors
+app.get('/directors', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Directors.find()
+        .then((directors) => {
+            res.status(201).json(directors);
         })
         .catch((err) => {
             console.error(err);
@@ -105,15 +125,10 @@ app.get('/genres/:Name', passport.authenticate('jwt', { session: false }),
 });
 
 // Get information about a director by name
-app.get('/directors/:Name', passport.authenticate('jwt', { session: false }),
-    (req, res) => {
-    Movies.findOne({ "Director.Name": req.params.Name })
-        .then((movie) => {
-            if (movie === null){
-                res.status(404).send("No director found")
-            } else {
-                res.json(movie.Director);
-            }
+app.get('/directors/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Directors.findOne({ Name: req.params.Name })
+        .then((director) => {
+            res.json(director);
         })
         .catch((err) => {
             console.error(err);
